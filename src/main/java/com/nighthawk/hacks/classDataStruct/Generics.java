@@ -13,7 +13,9 @@ public abstract class Generics {
 	private String type;	// extender should define themselves
 
 	// generic enumerated interface
-	public interface KeyTypes { String name(); }
+	public interface KeyTypes { KeyTypes title = null;
+
+    String name(); }
 	protected abstract KeyTypes getKey();  	// this method helps force usage of KeyTypes
 
 	// this method is used to establish key order

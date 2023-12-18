@@ -1,4 +1,4 @@
-package com.nighthawk.spring_portfolio.mvc.person;
+package com.nighthawk.spring_portfolio.mvc.worker;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -38,7 +38,7 @@ import lombok.NonNull;
 @NoArgsConstructor
 @Entity
 @Convert(attributeName = "worker", converter = JsonType.class)
-public class Person {
+public class Worker {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -61,13 +61,13 @@ public class Person {
     private Date dob;
 
     @ManyToMany(fetch = EAGER)
-    private Collection<PersonRole> roles = new ArrayList<>();
+    private Collection<WorkerRole> roles = new ArrayList<>();
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
     private Map<String, Map<String, Object>> stats = new HashMap<>();
 
-    public Person(String email, String password, String name, Date dob) {
+    public Worker(String email, String password, String name, Date dob) {
         this.email = email;
         this.password = password;
         this.name = name;
@@ -82,8 +82,8 @@ public class Person {
         return -1;
     }
 
-    public static Person[] init() {
-        Person w1 = new Person();
+    public static Worker[] init() {
+        Worker w1 = new Worker();
         w1.setName("John Doe");
         w1.setEmail("john.doe@example.com");
         w1.setPassword("workerPassword");
@@ -93,7 +93,7 @@ public class Person {
         } catch (Exception e) {
         }
 
-        Person w2 = new Person();
+        Worker w2 = new Worker();
         w2.setName("Jane Smith");
         w2.setEmail("jane.smith@example.com");
         w2.setPassword("workerPassword");
@@ -103,7 +103,7 @@ public class Person {
         } catch (Exception e) {
         }
 
-        Person w3 = new Person();
+        Worker w3 = new Worker();
         w3.setName("Bob Johnson");
         w3.setEmail("bob.johnson@example.com");
         w3.setPassword("workerPassword");
@@ -113,8 +113,8 @@ public class Person {
         } catch (Exception e) {
         }
 
-        Person workers[] = { w1, w2, w3 };
-        for (Person worker : workers) {
+        Worker workers[] = { w1, w2, w3 };
+        for (Worker worker : workers) {
             Map<String, Object> statsMap = new HashMap<>();
             statsMap.put("hoursWorked", 40);
             statsMap.put("projectsCompleted", 5);
@@ -124,8 +124,8 @@ public class Person {
     }
 
     public static void main(String[] args) {
-        Person workers[] = init();
-        for (Person worker : workers) {
+        Worker workers[] = init();
+        for (Worker worker : workers) {
             System.out.println(worker);
         }
     }
